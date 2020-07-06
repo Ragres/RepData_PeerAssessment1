@@ -26,7 +26,9 @@ colnames(sumTable)<- c("Date", "Steps")
 
 ## Histogram of the steps
 ```{r}
+
 hist(sumTable$Steps,main= "histogram of steps per day",xlab="Steps")
+
 ```
 
 ##Mean and median
@@ -47,6 +49,7 @@ clean <- activity[!is.na(activity$steps),]
 intervalTable <- ddply(clean, .(interval), summarize, Avg = mean(steps))
 
 ##Create line plot of average number of steps per interval
+
 p <- ggplot(intervalTable, aes(x=interval, y=Avg), xlab = "Interval", ylab="Average Number of Steps")
 p + geom_line()+xlab("Interval")+ylab("Average Number of Steps")+ggtitle("Average Number of Steps per Interval")
 
@@ -82,9 +85,11 @@ colnames(sumTable2)<- c("Date", "Steps")
 ##Histogram of the total number of steps taken each day after missing values are imputed
 ```{r}
 ## Creating the histogram of total steps per day, categorized by data set to show impact
+
 hist(sumTable2$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="Black")
 hist(sumTable$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="Grey", add=T)
 legend("topright", c("Imputed Data", "Non-NA Data"), fill=c("black", "grey") )
+
 ```
 
 ##Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
@@ -95,8 +100,10 @@ library(lattice)
 intervalTable2 <- ddply(mergeData, .(interval, DayCategory), summarize, Avg = mean(steps))
 
 ##Plot data in a panel plot
+
 xyplot(Avg~interval|DayCategory, data=intervalTable2, type="l",  layout = c(1,2),
        main="Average Steps per Interval Based on Type of Day", 
        ylab="Average Number of Steps", xlab="Interval")
+
 ```
 
